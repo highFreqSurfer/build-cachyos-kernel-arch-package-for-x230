@@ -1,0 +1,68 @@
+env:
+  package_name: "linux-cachyos"
+
+name: build
+on:
+  push:
+  schedule:
+    - cron: '0 21 * * *'
+
+jobs:
+
+  check_update:
+    runs-on: ubuntu-latest
+    outputs:
+      ret: ${{steps.check.outputs.ret}}
+    steps:
+      - id: check
+        uses: highFreqSurfer/check-aur-package-update@main
+        with:
+          aur-git: ${{env.package_name}}
+          ur-repo: highFreqSurfer/test-action
+          branch: package
+          
+      - name: print steps
+        run: |
+          echo "Step outputs: ${{steps.check.outputs.ret}}"
+      
+  print: 
+    runs-on: ubuntu-latest
+    needs: check_update
+    steps:
+      - name: print
+        run: echo ${{needs.check_update.outputs.ret}}
+        
+  build:
+    needs: check_update
+    if: needs.check_update.outputs.ret == 'YES'
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    
+    - name: build
+      uses: DuckSoft/build-aur-action@master
+      with:
+          repo-name: ${{env.package_name}}
+      env:
+        _use_llvm_lto: thin 
+        _localmodcfg: 1
+        _use_auto_optimization: ""
+        _processor_opt: "ivybridge"
+        _localmodcfg_path: "/github/workspace/modprobed.db"
+
+    - name: wind up
+      run: |
+        mkdir build
+        cd $package_name
+        cp *.tar.zst ../build
+        git rev-parse HEAD > ../build/built_commit
+
+    - name: publish
+      uses: s0/git-publish-subdir-action@develop
+      env:
+        REPO: self
+        BRANCH: package
+        FOLDER: build
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
