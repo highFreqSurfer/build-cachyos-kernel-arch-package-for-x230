@@ -1,5 +1,5 @@
 env:
-  package_name: "conservation_mode"
+  package_name: "linux-cachyos"
 
 name: build
 on:
