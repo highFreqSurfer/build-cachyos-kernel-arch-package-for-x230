@@ -18,7 +18,7 @@ jobs:
         uses: highFreqSurfer/check-aur-package-update@main
         with:
           aur-git: ${{env.package_name}}
-          ur-repo: highFreqSurfer/test-action
+          ur-repo: highFreqSurfer/build-cachyos-kernel-arch-package-for-x230
           branch: package
           
       #- name: print steps
