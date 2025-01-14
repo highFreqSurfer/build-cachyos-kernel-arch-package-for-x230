@@ -56,7 +56,7 @@ jobs:
       run: |
         mkdir build
         cd $package_name
-        cp *.tar.zst ../build
+        ln {*.tar.zst, *.db, *.files} ../build
         git rev-parse HEAD > ../build/built_commit
 
     - name: publish
