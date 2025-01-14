@@ -21,9 +21,9 @@ jobs:
           ur-repo: highFreqSurfer/test-action
           branch: package
           
-      - name: print steps
-        run: |
-          echo "Step outputs: ${{steps.check.outputs.ret}}"
+      #- name: print steps
+      #  run: |
+      #    echo "Step outputs: ${{steps.check.outputs.ret}}"
       
   print: 
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v2
     
     - name: build
-      uses: DuckSoft/build-aur-action@master
+      uses: highFreqSurfer/build-aur-action@master
       with:
           repo-name: ${{env.package_name}}
       env:
