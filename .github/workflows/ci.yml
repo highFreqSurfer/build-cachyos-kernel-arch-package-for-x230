@@ -1,5 +1,5 @@
 env:
-  package_name: "linux-cachyos"
+  package_name: "conservation_mode"
 
 name: build
 on:
@@ -54,8 +54,10 @@ jobs:
 
     - name: wind up
       run: |
+        set -x
         mkdir build
         cd $package_name
+        ls -lha
         ln {*.tar.zst, *.db, *.files} ../build
         git rev-parse HEAD > ../build/built_commit
 
