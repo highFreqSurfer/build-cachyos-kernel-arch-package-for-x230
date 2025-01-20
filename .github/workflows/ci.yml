@@ -46,9 +46,9 @@ jobs:
       with:
           repo-name: ${{env.package_name}}
       env:
-        _use_llvm_lto: thin 
-        _localmodcfg: 1
-        _use_auto_optimization: ""
+        _use_llvm_lto: full 
+        _localmodcfg: yes
+        _use_auto_optimization: no
         _processor_opt: "ivybridge"
         _localmodcfg_path: "/github/workspace/modprobed.db"
 
