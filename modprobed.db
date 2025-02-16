@@ -141,3 +141,5 @@ zsmalloc
 atkbd
 des_generic
 snd_usb_audio
+overlay
+vfat
