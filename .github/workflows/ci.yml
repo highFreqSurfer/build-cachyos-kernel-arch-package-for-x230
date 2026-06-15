@@ -40,6 +40,11 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: install gpg key
+      run: |
+        pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+        pacman-key --lsign-key F3B607488DB35A47
     
     - name: build
       uses: highFreqSurfer/build-aur-action@master
@@ -54,6 +59,9 @@ jobs:
 
     - name: wind up
       run: |
+        if [ "$?" != 0 ]; then
+          exit $?
+        fi
         set -x
         mkdir build
         cd $package_name
