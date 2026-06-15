@@ -46,8 +46,8 @@ jobs:
       with:
           repo-name: ${{env.package_name}}
           run-before-build: |
-            gpg --keyserver ://ubuntu.com --recv-keys E18447AC260021D31F3FF6C4C8A2A4774B8B63C4
-            gpg --keyserver ://ubuntu.com --recv-keys E8B9AA39F054E30E8290D492C3C4820857F654FE
+            gpg --keyserver://ubuntu.com --recv-keys E18447AC260021D31F3FF6C4C8A2A4774B8B63C4
+            gpg --keyserver://ubuntu.com --recv-keys E8B9AA39F054E30E8290D492C3C4820857F654FE
 
       env:
         _use_llvm_lto: full 
