@@ -48,8 +48,8 @@ jobs:
           run-before-build: |
             pacman-key --init
             pacman-key --populate archlinux
-            pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
-            pacman-key --lsign-key F3B607488DB35A47
+            pacman-key --recv-keys C8A2A4774B8B63C4 --keyserver keyserver.ubuntu.com
+            pacman-key --lsign-key C8A2A4774B8B63C4
       env:
         _use_llvm_lto: full 
         _localmodcfg: yes
