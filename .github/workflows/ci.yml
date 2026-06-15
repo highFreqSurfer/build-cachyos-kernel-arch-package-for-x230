@@ -1,5 +1,5 @@
 env:
-  package_name: "linux-cachyos"
+  package_name: "linux-cachyos-rc"
 
 name: build
 on:
